@@ -6,7 +6,9 @@
 - `.github/workflows/deploy-pages.yml`을 추가해 `apps/web/`만 GitHub Pages에 게시하도록 했다. 앱은 상대 경로 기반 ES 모듈이라 별도 번들 작업을 넣지 않았다.
 - README, 제품·아키텍처·개발·현재 상태 문서를 Pages 중심으로 갱신하고 배포·저장 경계를 별도 문서와 ADR에 남겼다. 기존 GAS v4 배포는 보존하고 선택 가능한 이전 경로로 설명한다.
 - GAS URL과 Pages URL은 다른 출처여서 `localStorage` 설정·세션이 자동 복사되지 않는 점을 명시했다.
-- 이 기록을 작성할 때는 Pages 첫 게시를 아직 확인하지 않았다. 원격 푸시와 Actions 실행 뒤 [`NEXT.md`](NEXT.md)의 상태를 갱신한다.
+- 커밋 `2ed570d`를 `main`에 푸시했다. Pages 자동 배포 작업도 시작됐지만 `Configure GitHub Pages` 단계에서 저장소에 Pages 사이트가 아직 설정되지 않아 실패했다. 워크플로 파일은 `GITHUB_TOKEN`으로 Pages 사이트를 임의 생성하지 않도록 두었다.
+- 공개 주소 확인 전이며 남은 설정·재실행은 [`NEXT.md`](NEXT.md)에 기록했다. 코드 업로드는 완료됐고 실제 Pages 게시 상태와 구분한다.
+- 검증: 로컬 Edge 브라우저 시나리오 12개와 핵심 로직 테스트 65개가 통과했다. `pnpm test`의 나머지 GAS 번들 테스트 1개는 샌드박스의 상위 디렉터리 접근 거부로 빌드하지 못했다. 이 GitHub Pages 변경과 직접 관련이 없는 기존 GAS 테스트다.
 
 ## 최신 변경 — 레포 구조 정리
 

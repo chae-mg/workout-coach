@@ -4,7 +4,7 @@
 
 ## 실행
 
-공개 앱: [https://chae-mg.github.io/workout-coach/](https://chae-mg.github.io/workout-coach/)
+배포 예정 주소: [https://chae-mg.github.io/workout-coach/](https://chae-mg.github.io/workout-coach/) (저장소에서 Pages 게시를 켠 뒤 사용할 수 있습니다.)
 
 로컬에서는 Node.js 22 이상과 pnpm을 준비하고 다음 명령을 실행합니다.
 
