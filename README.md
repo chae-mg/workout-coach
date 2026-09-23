@@ -4,7 +4,7 @@
 
 ## 실행
 
-배포 예정 주소: [https://chae-mg.github.io/workout-coach/](https://chae-mg.github.io/workout-coach/) (저장소에서 Pages 게시를 켠 뒤 사용할 수 있습니다.)
+공개 앱: [https://chae-mg.github.io/workout-coach/](https://chae-mg.github.io/workout-coach/)
 
 로컬에서는 Node.js 22 이상과 pnpm을 준비하고 다음 명령을 실행합니다.
 
@@ -17,7 +17,7 @@ pnpm dev
 
 ## 배포
 
-기본 배포 대상은 GitHub Pages이며 GitHub Actions가 `apps/web/`의 정적 파일만 게시합니다. 앱은 브라우저 모듈을 직접 사용하므로 별도 빌드가 필요하지 않습니다. 첫 배포 때 저장소 **Settings → Pages → Build and deployment → Source**에서 `GitHub Actions`를 선택합니다. 상세 절차와 저장 데이터의 출처별 경계는 [GitHub Pages 배포 안내](./docs/05_DEVELOPMENT/GITHUB_PAGES.md)에 있습니다.
+기본 배포 대상은 GitHub Pages이며 GitHub Actions가 `apps/web/`의 정적 파일만 게시합니다. 앱은 브라우저 모듈을 직접 사용하므로 별도 빌드가 필요하지 않습니다. 이 저장소의 Pages 원본은 `GitHub Actions`로 설정되어 있고 `main`의 앱 변경을 자동 배포합니다. 상세 절차와 저장 데이터의 출처별 경계는 [GitHub Pages 배포 안내](./docs/05_DEVELOPMENT/GITHUB_PAGES.md)에 있습니다.
 
 기존 GAS v4 배포는 유지되며, 앱 설정과 진행 상태는 GAS 주소와 Pages 주소 사이에서 자동 이동하지 않습니다. GAS 파일 생성·배포는 [GAS 배포 안내](./docs/05_DEVELOPMENT/GAS_DEPLOYMENT.md)를 참고합니다.
 

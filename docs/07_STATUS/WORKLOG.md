@@ -10,6 +10,13 @@
 - 공개 주소 확인 전이며 남은 설정·재실행은 [`NEXT.md`](NEXT.md)에 기록했다. 코드 업로드는 완료됐고 실제 Pages 게시 상태와 구분한다.
 - 검증: 로컬 Edge 브라우저 시나리오 12개와 핵심 로직 테스트 65개가 통과했다. `pnpm test`의 나머지 GAS 번들 테스트 1개는 샌드박스의 상위 디렉터리 접근 거부로 빌드하지 못했다. 이 GitHub Pages 변경과 직접 관련이 없는 기존 GAS 테스트다.
 
+### 첫 GitHub Pages 게시 — 2026-09-23
+
+- 사용자 승인 후 저장소 Settings → Pages의 게시 원본을 `GitHub Actions`로 변경했다.
+- 실패했던 배포 작업을 재실행해 성공을 확인했다. `Configure GitHub Pages`, `Upload browser app`, `Deploy site`가 모두 통과했다.
+- `https://chae-mg.github.io/workout-coach/`를 열어 Workout Coach 제목, 운동 선택 안내와 운동 카드 10개가 표시되는 것을 확인했다. 이는 실제 웹 배포 확인이며 Android 실기기 기능 검수는 포함하지 않는다.
+- 기존 GAS 배포는 삭제하거나 수정하지 않았다. GAS 주소와 Pages 주소의 `localStorage`는 분리되어 있다.
+
 ## 최신 변경 — 레포 구조 정리
 
 - 노션의 레포·문서 구조 템플릿을 기준으로 `apps/web/`에 웹앱 원본(`src/`, `public/`, `index.html`)을 모았다.

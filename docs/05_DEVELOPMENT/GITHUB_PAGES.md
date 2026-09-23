@@ -2,7 +2,7 @@
 
 Workout Coach 브라우저 앱은 정적 HTML·CSS·JavaScript 앱이다. `.github/workflows/deploy-pages.yml`이 `apps/web/`만 GitHub Pages에 게시하므로 GAS 파일 생성이나 별도 빌드가 필요하지 않다.
 
-프로젝트 페이지의 예정 주소는 [https://chae-mg.github.io/workout-coach/](https://chae-mg.github.io/workout-coach/)다. 첫 배포 전 저장소의 **Settings → Pages → Build and deployment → Source**에서 `GitHub Actions`를 선택해야 한다. 현재 이 저장소는 설정이 아직 안 되어 첫 Actions 실행이 중단됐다. 설정 후 Actions에서 `Deploy GitHub Pages`를 다시 실행하면 게시된다. 저장소가 공개되어 있어 GitHub Free에서도 Pages를 사용할 수 있다. 자세한 내용은 [GitHub Pages 사용자 지정 워크플로 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)를 참고한다.
+프로젝트 페이지 주소는 [https://chae-mg.github.io/workout-coach/](https://chae-mg.github.io/workout-coach/)다. 저장소의 **Settings → Pages → Build and deployment → Source**는 `GitHub Actions`로 설정되어 있다. GitHub Actions의 첫 배포를 성공적으로 마쳤고, 공개 주소에서 운동 선택 화면을 확인했다. `main`에서 `apps/web/` 또는 배포 워크플로가 바뀌면 자동 배포하며 Actions에서 수동 실행도 가능하다. 저장소가 공개되어 있어 GitHub Free에서도 Pages를 사용할 수 있다. 자세한 내용은 [GitHub Pages 사용자 지정 워크플로 안내](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)를 참고한다.
 
 배포 뒤 Actions의 `Deploy GitHub Pages` 실행이 성공했는지 확인하고 위 주소를 연다. 운동 선택 화면이 표시되고 아이콘·스타일·모듈 스크립트가 로드되면 기본 제공을 확인한 것이다. Android의 실제 소리·화면 꺼짐 방지 동작은 브라우저 자동 검사와 별개다.
 
