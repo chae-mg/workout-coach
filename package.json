@@ -1,0 +1,28 @@
+{
+  "name": "workout-coach",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.js",
+    "test": "node --test tests/*.test.js",
+    "test:browser": "node scripts/test-browser.js",
+    "test:selection": "node --test --test-name-pattern=\"selection|initial\" tests/settings.test.js tests/exercises.test.js && node scripts/test-selection.js",
+    "test:review": "node --test --test-name-pattern=\"review|independent session snapshots|estimated duration\" tests/review.test.js tests/settings.test.js tests/session.test.js && node scripts/test-review.js",
+    "test:player": "node --test --test-name-pattern=\"player|stale completion|skipping an exercise\" tests/player.test.js tests/session.test.js && node scripts/test-player.js",
+    "test:rest-settings": "node --test --test-name-pattern=\"rest-settings|exercise defaults|resolved nested|corrupt or future settings|invalid overrides|rest adjustment|background expiry advances a rest|full sequence|legacy overrides|unavailable storage\" tests/rest-settings.test.js tests/settings.test.js tests/session.test.js tests/storage.test.js && node scripts/test-rest-settings.js",
+    "test:timer-resume": "node --test tests/session.test.js tests/storage.test.js tests/timer-resume.test.js tests/exercises.test.js && node scripts/test-timer-resume.js",
+    "test:effects": "node --test tests/effects.test.js tests/rest-alarm.test.js && node scripts/test-effects.js",
+    "test:mobile": "node scripts/test-mobile-stage.js",
+    "build:gas": "node scripts/build-gas.js",
+    "preview:gas": "node scripts/build-gas.js && node scripts/preview-gas.js",
+    "test:gas": "node --test tests/gas.test.js && node scripts/test-gas.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "playwright": "1.63.0"
+  }
+}

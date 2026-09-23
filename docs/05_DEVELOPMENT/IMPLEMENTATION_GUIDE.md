@@ -1,15 +1,20 @@
 # IMPLEMENTATION_GUIDE — GAS
 
-## 1. 권장 파일 구조
+이 문서는 [PLAN.md](../01_PRODUCT/PLAN.md)의 12~13단계에서 사용할 참고 자료다. 먼저 로컬 앱을 단계별로 검토하고 모바일 검수를 진행한다. 아래 GAS 예시와 현재 빌드 스크립트를 초기 단계에서 모두 적용할 필요는 없다.
+
+현재는 로컬 모듈로 구현·테스트한 뒤 `scripts/build-gas.js`로 GAS 배포 파일을 자동 생성한다. 아래 GAS 예시는 배포 환경의 역할을 설명하며, 수정할 원본은 `apps/web/src/`에 있다. 실제 산출물은 `Code.gs`, `Index.html`, `Styles.html`, `Script.html`, `appsscript.json`이며 운동 데이터와 앱 설정은 `Script.html`에 묶는다.
+
+## 1. 현재 생성 파일 구조
 
 ```text
 Code.gs
-Config.gs
 Index.html
 Styles.html
-Exercises.html
 Script.html
+appsscript.json
 ```
+
+아래 `Config.gs`·`Exercises.html` 예시는 역할 설명용이다. 현재 앱의 설정·운동 데이터는 `Script.html`에 포함되므로 별도 파일을 만들지 않는다.
 
 ---
 
@@ -27,7 +32,8 @@ function doGet() {
   return HtmlService
     .createTemplateFromFile('Index')
     .evaluate()
-    .setTitle('Workout Coach');
+    .setTitle('Workout Coach')
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1, viewport-fit=cover');
 }
 
 function include(filename) {
@@ -343,24 +349,7 @@ Workout 종료 시 Release.
 
 ---
 
-# 14. Vibration
-
-```javascript
-function vibrate(pattern) {
-
-  if (!navigator.vibrate) {
-    return;
-  }
-
-  navigator.vibrate(pattern);
-}
-```
-
-설정 OFF 시 호출하지 않는다.
-
----
-
-# 15. App Icon
+# 14. App Icon
 
 App Icon URL은 Config 한 곳에서 관리한다.
 
@@ -453,14 +442,14 @@ MVP에서는 다음을 추가하지 않는다.
 - 별도 Database
 - Google Sheets Storage
 - Complex Router
-- Build Tool
-- Package Manager
 
-GAS + Vanilla HTML/CSS/JavaScript만 사용한다.
+배포 앱은 GAS + Vanilla HTML/CSS/JavaScript만 사용한다. 로컬 개발 서버와 테스트에는 Node.js를 사용하고, 개발 의존성인 Playwright와 esbuild는 테스트·배포 파일 생성에만 사용한다. Node.js 백엔드를 배포하지 않으며 패키지 매니저는 pnpm을 사용한다.
 
 ---
 
 # 19. 구현 완료 체크
+
+이 체크리스트는 최종 GAS 환경 검수용이다. 로컬 구현·자동 테스트 결과와 실제 GAS 배포 여부는 [WORKLOG.md](../07_STATUS/WORKLOG.md)에 구분해 기록한다.
 
 - [ ] 모바일 2×N Grid
 - [ ] 운동 선택 순서

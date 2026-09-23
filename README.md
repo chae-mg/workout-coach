@@ -1,106 +1,48 @@
 # Workout Coach
 
-개인용 홈트레이닝 진행 보조 웹앱입니다.
+개인용 홈트레이닝 진행 보조 웹앱입니다. 운동 선택, 세트·휴식 타이머, 반복 알람, 시간 운동과 설정 저장을 제공합니다.
 
-Google Apps Script(GAS) Web App으로 배포하며, 주 사용 환경은 모바일 브라우저입니다.  
-운동을 선택한 뒤 세트 진행, Tempo 안내음, 휴식 Countdown, 다음 운동 안내까지 한 흐름으로 진행하는 것을 목표로 합니다.
+## 실행
 
-## 핵심 컨셉
+공개 앱: [https://chae-mg.github.io/workout-coach/](https://chae-mg.github.io/workout-coach/)
 
-이 앱은 운동 기록 중심 앱이 아니라 **Workout Player**입니다.
+로컬에서는 Node.js 22 이상과 pnpm을 준비하고 다음 명령을 실행합니다.
 
-사용자는 운동 전에 오늘 진행할 운동을 순서대로 선택하고, 운동 중에는 화면의 안내에 따라 세트와 휴식을 진행합니다.
-
-기본 흐름:
-
-```text
-운동 선택
-→ 오늘 운동 확인
-→ Workout Player
-→ 세트 완료
-→ Rest Timer
-→ 다음 세트 / 다음 운동
-→ 운동 완료
+```sh
+pnpm install --frozen-lockfile
+pnpm dev
 ```
 
-## 주요 기능
+브라우저에서 `http://127.0.0.1:4173`을 엽니다.
 
-- Mobile-first UI
-- 운동 선택 2×N Grid
-- 선택 순서대로 운동 진행
-- 운동 카드에 이미지 + 운동명 + 목표 부위 표시
-- 운동별 세트 / 횟수 / 시간 / 휴식 설정
-- Tempo Sound
-- Rest Timer
-- 휴식 ±15초 조절 및 건너뛰기
-- 다음 세트 / 다음 운동 미리보기
-- Session Resume
-- 설정값 localStorage 저장
-- 현재 운동 상태 localStorage 저장
-- 화면 꺼짐 방지 옵션
-- 진동 / 휴식 종료음 / Countdown Sound 옵션
-- Favicon / Apple Touch Icon 확장 구조
+## 배포
 
-## 기술 구성
+기본 배포 대상은 GitHub Pages이며 GitHub Actions가 `apps/web/`의 정적 파일만 게시합니다. 앱은 브라우저 모듈을 직접 사용하므로 별도 빌드가 필요하지 않습니다. 첫 배포 때 저장소 **Settings → Pages → Build and deployment → Source**에서 `GitHub Actions`를 선택합니다. 상세 절차와 저장 데이터의 출처별 경계는 [GitHub Pages 배포 안내](./docs/05_DEVELOPMENT/GITHUB_PAGES.md)에 있습니다.
 
-```text
-Google Apps Script
-├─ Code.gs
-├─ Config.gs
-├─ Index.html
-├─ Styles.html
-├─ Script.html
-└─ Exercises.html
+기존 GAS v4 배포는 유지되며, 앱 설정과 진행 상태는 GAS 주소와 Pages 주소 사이에서 자동 이동하지 않습니다. GAS 파일 생성·배포는 [GAS 배포 안내](./docs/05_DEVELOPMENT/GAS_DEPLOYMENT.md)를 참고합니다.
+
+## 개발과 검증
+
+```sh
+pnpm test
+pnpm test:browser
+pnpm test:mobile
 ```
 
-별도의 DB나 Google Sheets는 사용하지 않습니다.
+사운드·기기 보조 기능은 실제 휴대폰에서도 별도 확인해야 합니다. 자동 브라우저 검사 결과와 실기기 결과는 [모바일 검수 기록](./docs/07_STATUS/MOBILE_QA.md)에서 구분합니다.
+
+## 구조
 
 ```text
-영구 설정
-→ localStorage
-
-현재 운동 Session
-→ localStorage
-
-운동 기본 데이터
-→ Exercises.html 내부 JavaScript 객체
+apps/web/                 브라우저 앱과 Pages 게시 대상
+apps/web/src/core/        운동 상태, 설정과 시간 계산
+apps/web/src/browser/     localStorage, Web Audio, Wake Lock
+apps/web/src/ui/          화면과 스타일
+docs/                     제품·구조·개발·상태 문서
+scripts/                  로컬 서버, 브라우저 테스트, 이전 GAS 빌드
+tests/                    핵심 로직 테스트
 ```
 
-## 권장 개발 순서
+설정과 현재 운동은 브라우저 `localStorage`에만 저장합니다. 계정, 서버, 데이터베이스와 기기 간 동기화는 제공하지 않습니다.
 
-1. UI Skeleton 구현
-2. 운동 데이터 구조 적용
-3. 운동 선택 로직
-4. Workout Player
-5. Rest Timer
-6. Tempo Sound
-7. 설정 + localStorage
-8. Session Resume
-9. 모바일 브라우저 검수
-10. GAS 배포
-
-세부 구현 순서는 [PLAN.md](./PLAN.md)를 참고합니다.
-
-## 문서
-
-- [PRD.md](./PRD.md) — 제품 요구사항
-- [PLAN.md](./PLAN.md) — 구현 단계 및 작업 순서
-- [DATA_MODEL.md](./DATA_MODEL.md) — 운동 데이터 / 설정 / localStorage 구조
-- [UI_SPEC.md](./UI_SPEC.md) — 화면 구조 및 UI 동작
-- [IMPLEMENTATION_GUIDE.md](./IMPLEMENTATION_GUIDE.md) — GAS 구현 기준
-
-## MVP에서 제외
-
-다음 기능은 초기 버전에서 구현하지 않습니다.
-
-- 사용자 계정
-- 서버 DB
-- Google Sheets 기반 설정 저장
-- 운동 기록 분석
-- 주간 / 월간 리포트
-- Progressive overload 자동 추천
-- Cloud Sync
-- PWA 고도화
-- 다중 사용자 지원
-
-필요성이 생긴 경우 2차 기능으로 확장합니다.
+제품 문서는 [문서 안내](./docs/00_INDEX.md), 현재 프로젝트 상태는 [CURRENT.md](./docs/07_STATUS/CURRENT.md)를 참고합니다.
